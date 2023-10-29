@@ -1,7 +1,8 @@
-const contacts = require('../models/contactModel');
+// const contacts = require('../models/contactModel');
 const catchAsync = require('../utils/catchAsync');
 const db = require('../models');
 const users = db.users;
+const contacts = db.userData;
 const AppError = require('../utils/appError');
 
 exports.admin = catchAsync(async (req, res) => {
@@ -11,8 +12,10 @@ exports.admin = catchAsync(async (req, res) => {
   });
 });
 
+// get all contact form data
 exports.getAllRequests = catchAsync(async (req, res) => {
-  const requests = await contacts.find();
+  const requests = await contacts.findAll();
+  // const requests = await users.findAll();
 
   res.status(200).json({
     status: 'success',
@@ -21,6 +24,7 @@ exports.getAllRequests = catchAsync(async (req, res) => {
   });
 });
 
+// get all users 
 exports.getAllUsers = catchAsync(async (req, res) => {
   const allusers = await users.findAll();
 
@@ -31,6 +35,7 @@ exports.getAllUsers = catchAsync(async (req, res) => {
   });
 });
 
+// delete single contact form data 
 exports.deleteRequest = catchAsync(async (req, res, next) => {
   const doc = await contacts.findByPkAndDelete(req.params.id);
 
@@ -44,6 +49,8 @@ exports.deleteRequest = catchAsync(async (req, res, next) => {
   });
 });
 
+
+// delete single user 
 exports.deleteUser = catchAsync(async (req, res, next) => {
   const doc = await users.findByPkAndDelete(req.params.id);
 

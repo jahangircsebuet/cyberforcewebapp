@@ -26,7 +26,10 @@ app.use('/api/contact-data', contactRouter);
 
 app.use('/api/users', userRouter);
 
-app.use('/api/admin', authController.protect, adminRouter);
+// TODO uncomment the below line to add API authentication 
+// app.use('/api/admin', authController.protect, adminRouter);
+// this is to check admin APIs without authentication 
+app.use('/api/admin', adminRouter);
 
 app.use(globalErrorHandler); // mostly unused
 

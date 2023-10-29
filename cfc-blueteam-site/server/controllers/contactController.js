@@ -6,6 +6,7 @@ const UserData = db.userData;
 const sendEmail = require('../utils/email');
 const ftp = require('basic-ftp');
 
+// create new contact form data 
 exports.userData = catchAsync(async (req, res, next) => {
   const { fullname, email, phonenumber, message } = req.body;
   const newContact = await UserData.create({
@@ -22,10 +23,12 @@ exports.userData = catchAsync(async (req, res, next) => {
   });
 });
 
+// upload file from contact form 
 exports.fileUpload = catchAsync(async (req, res, next) => {
   const file = req.file;
   const fileName = req.file.originalname;
   const uploadDir = path.join(__dirname, '..', 'uploads');
+  console.log("uploadDir: " + uploadDir);
   const filePath = path.join(uploadDir, fileName);
 
   fs.writeFile(filePath, file.buffer, (err) => {
@@ -78,6 +81,7 @@ exports.fileUpload = catchAsync(async (req, res, next) => {
       'Thank you for contacting us! We have received your message and will get back to you shortly.',
   });
 });
+
 
 exports.getFiles = catchAsync(async (req, res, next) =>{
   try {
