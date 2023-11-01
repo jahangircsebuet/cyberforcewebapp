@@ -28,6 +28,8 @@ exports.getAllRequests = catchAsync(async (req, res) => {
 exports.getAllUsers = catchAsync(async (req, res) => {
   const allusers = await users.findAll();
 
+  console.log(allusers);
+
   res.status(200).json({
     status: 'success',
     results: allusers.length,
@@ -37,7 +39,12 @@ exports.getAllUsers = catchAsync(async (req, res) => {
 
 // delete single contact form data 
 exports.deleteRequest = catchAsync(async (req, res, next) => {
-  const doc = await contacts.findByPkAndDelete(req.params.id);
+  console.log("Contact ID:",req.params.id);
+  const doc = await contacts.destroy({
+    where: {
+      id: req.params.id
+    }
+  });
 
   if (!doc) {
     return next(new AppError('No document found with that ID', 404));
@@ -52,7 +59,12 @@ exports.deleteRequest = catchAsync(async (req, res, next) => {
 
 // delete single user 
 exports.deleteUser = catchAsync(async (req, res, next) => {
-  const doc = await users.findByPkAndDelete(req.params.id);
+  console.log("Deleted ID:",req.params.id);
+  const doc = await users.destroy({
+    where: {
+      id: req.params.id
+    }
+  });
 
   if (!doc) {
     return next(new AppError('No document found with that ID', 404));
