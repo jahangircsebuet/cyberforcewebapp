@@ -16,6 +16,11 @@ function Footer() {
     }
   }
 
+  const scrollToTop = async ()=>{
+    console.log("Footer");
+    document.documentElement.scrollTop = 0;
+  }
+
   return (
     <div className='footer_wrapper'>
       <footer>
@@ -38,7 +43,7 @@ function Footer() {
               <Link to='/der-data'>DER Data</Link>
             </li>
             <li>
-              <Link to='/contact-us'>Contact Us</Link>
+              <Link to='/contact-us' onClick={scrollToTop}>Contact Us</Link>
             </li>
           </ul>
         </div>

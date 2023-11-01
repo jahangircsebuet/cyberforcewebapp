@@ -34,6 +34,11 @@ function NavBar() {
     }
   }
 
+  const scrollToTop = async ()=>{
+    console.log("Footer");
+    document.documentElement.scrollTop = 0;
+  }
+
   return (
     <div className='navbar'>
       <header>
@@ -56,9 +61,9 @@ function NavBar() {
             </li>
             <li>
               {role === 'admin' ? (
-                <Link to='/admin'>Portal</Link>
+                <Link to='/admin' onClick={scrollToTop}>Portal</Link>
               ) : (
-                <Link to='/contact-us'>Contact Us</Link>
+                <Link to='/contact-us' onClick={scrollToTop}>Contact Us</Link>
               )}
             </li>
           </ul>
