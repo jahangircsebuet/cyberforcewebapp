@@ -1,11 +1,37 @@
 import { AdminContext } from '../context/AdminContext';
-import { useContext } from 'react';
+import { useContext, useRef, useState, useEffect} from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 
 const AdminReqCards = () => {
   const { contactReqData, fetchContactRequests } = useContext(AdminContext);
   const { token } = useContext(AuthContext);
+
+
+  // file download 
+  const [file, setFile] = useState();
+  const fileLink = useRef();
+  useEffect(() => {
+    if (file) {
+      fileLink.current.click();
+    }
+  }, [file]);
+
+  // const download = async (e) => {
+  //   alert("download called");
+  //   const url = window.URL.createObjectURL(new Blob([e.target.innerText]));
+  //   const link = document.createElement('a');
+  //   link.href = url;
+  //   link.setAttribute('download', e.target.innerText);
+  //   document.body.appendChild(link);
+  //   link.click();
+  // };
+
+  const fetchFile = async (e) => {
+    const response = await fetch(e.target.innerText);
+    const data = await response.json();
+    setFile(data);
+  };
 
   const deleteRequest = (id) => {
     axios
@@ -59,7 +85,10 @@ const AdminReqCards = () => {
                 <strong>Message:</strong> {item.message}
               </p>
               <p>
-                <strong>File Link: </strong> {!item.file ? 'N/A' : item.file}
+                <strong>File Link: </strong> {!item.file ? 'N/A' : <a href={item.file} target="_blank" rel="noreferrer" onClick={fetchFile}>Open</a>}
+                | {<a download href={item.file} target="_blank" ref={fileLink} onClick={fetchFile}>Download</a>}
+                
+                {/* <strong>File Link: </strong> {!item.file ? 'N/A' : item.file} */}
               </p>
             </div>
 

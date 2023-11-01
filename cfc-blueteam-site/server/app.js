@@ -8,6 +8,10 @@ const adminRouter = require('./routes/adminRoutes');
 const app = express();
 const authController = require('./controllers/authController');
 
+
+const path = require('path')
+app.use('/static', express.static(path.join(__dirname, 'uploads')))
+
 //app.use(cors());
 
 // 1) MIDDLEWARES
