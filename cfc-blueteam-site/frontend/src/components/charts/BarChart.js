@@ -11,7 +11,7 @@ function BarChart() {
       axios
         .get('/api/users/der-data/sql')
         .then((res) => {
-          const icsData = res.data.data.data;
+          const icsData = res.data.data.power;
           console.log(icsData);
           setData(icsData);
         })

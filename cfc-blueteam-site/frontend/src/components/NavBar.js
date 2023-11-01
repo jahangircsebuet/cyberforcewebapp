@@ -25,8 +25,18 @@ function NavBar() {
       document.getElementById('scroll-to-about-us-div').scrollIntoView({behavior: 'smooth'});
     } else {
       console.log("else block");
-      window.location.href = "http://localhost:3000";
+      // window.location.href = "http://localhost:3000";
+      console.log("else block");
+      setTimeout(
+        () => document.getElementById('scroll-to-about-us-div').scrollIntoView({behavior: 'smooth'}),
+        0
+      );
     }
+  }
+
+  const scrollToTop = async ()=>{
+    console.log("Footer");
+    document.documentElement.scrollTop = 0;
   }
 
   return (
@@ -44,16 +54,16 @@ function NavBar() {
         <nav>
           <ul className='nav__links'>
             <li>
-              <Link id='aboutUs' onClick={scrollToAboutUs}>About Us</Link>
+              <Link to='/' onClick={scrollToAboutUs}>About Us</Link>
             </li>
             <li>
               <Link to='/der-data'>DER Data</Link>
             </li>
             <li>
               {role === 'admin' ? (
-                <Link to='/admin'>Portal</Link>
+                <Link to='/admin' onClick={scrollToTop}>Portal</Link>
               ) : (
-                <Link to='/contact-us'>Contact Us</Link>
+                <Link to='/contact-us' onClick={scrollToTop}>Contact Us</Link>
               )}
             </li>
           </ul>

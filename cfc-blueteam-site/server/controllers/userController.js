@@ -1,40 +1,42 @@
 const db = require('../models');
 const User = db.users;
+const Eff = db.efficiencies;
+const Temp = db.temperature;
+const Power = db.power;
 const Op = db.Sequelize.Op;
 const catchAsync = require('../utils/catchAsync');
 
-// exports.create = (req, res) => {
-
-// };
-
 exports.getSQL = catchAsync(async (req, res, next) => {
     try {
-        const [power] = await db.sequelize.query("'SELECT * FROM power_usage;'",
+        const [power] = await db.sequelize.query("SELECT * FROM power_usage;",
             {
               model: Power,
               mapToModel: true,
-            });
-        const [eff] = await db.sequelize.query("'SELECT * FROM efficiencies;'",
+            }
+            );
+        const [eff] = await db.sequelize.query("SELECT * FROM efficiencies;",
         {
-            model: Efficiencies,
+            model: Eff,
             mapToModel: true,
-        });
+        }
+        );
 
-        const [temps] = await db.sequelize.query("'SELECT * FROM temperature;'",
+        const [temp] = await db.sequelize.query("SELECT * FROM temperature;",
         {
-            model: Temperature,
+            model: Temp,
             mapToModel: true,
-        });
+        }
+        );
         // const eff = await db.sequelize.query('SELECT * FROM efficiencies;');
         // const temps = await db.sequelize.query('SELECT * FROM temperature;')
 
-        console.log(response.rows, '\n');
+        console.log("DER Data::", eff, '\n');
         res.status(200).json({
         status: 'success',
         data: {
-            data: response.rows,
-            eff: eff.rows,
-            temp: temps.rows
+            power: power,
+            eff: eff,
+            temp: temp
 
         },
         message: 'database connection successfully established',
