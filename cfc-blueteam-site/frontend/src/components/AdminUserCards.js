@@ -56,7 +56,7 @@ const AdminUserCards = () => {
                 <strong>ID:</strong> {user.id}
               </p>
               <p>
-                <strong>Role: </strong> {user.is_admin}
+                <strong>Role: </strong> {user.is_admin? 'admin': 'non-admin'}
               </p>
             </div>
 

@@ -51,11 +51,11 @@ exports.login = catchAsync(async (req, res, next) => {
   const id = user.id;
   const fullname = user.name;
   const dbPassword = user.password;
-  const role = 0;
+  const role = is_admin ? 'admin':0;
 
-  if (is_admin) {
-    role = 'admin';
-  }
+  // if (is_admin) {
+  //   role = 'admin';
+  // }
 
   if (!user) {
     return next(new AppError('Incorrect email or password', 401));
