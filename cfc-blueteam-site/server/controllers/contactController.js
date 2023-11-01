@@ -59,6 +59,19 @@ exports.fileUpload = catchAsync(async (req, res, next) => {
     Message: ${newContact.message}\n`,
   });
 
+  // check if submitted contact found or not
+  const contactData = await UserData.findOne({ where: { name: newContact.name, email: newContact.email,  phoneNumber: newContact.phoneNumber} });
+  if (contactData === null) {
+    res.status(200).json({
+      status: 'failed',
+      message:
+        'No matching contact data found!',
+    });
+  } else {
+    contactData.file = fileName;
+    await contactData.save();
+  }
+
   const client = new ftp.Client();
   client.ftp.verbose = true;
 
