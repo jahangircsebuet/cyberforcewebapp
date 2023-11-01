@@ -9,9 +9,12 @@ function EffGauge() {
       axios
         .get('/api/users/der-data/sql')
         .then((res) => {
+          console.log("Res: ", res);
           const icsData = res.data.data.eff;
 
-         const invEff = icsData[(icsData.length - 1)].inv_eff
+        console.log("inv Eff: ", icsData)
+        const invEff = icsData[(icsData.length - 1)].val
+         
           setData(invEff);
         })
         .catch((error) => {
@@ -24,9 +27,6 @@ function EffGauge() {
       clearInterval(intervalId);
     };
   }, []);
-
-  
-
 
 
   return (

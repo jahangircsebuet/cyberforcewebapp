@@ -11,7 +11,7 @@ function TempGauge() {
         .then((res) => {
           const icsData = res.data.data.temp;
 
-          const batt_temp = icsData[icsData.length - 1].battery_temp;
+          const batt_temp = icsData[icsData.length - 1].val;
           setData(batt_temp);
         })
         .catch((error) => {

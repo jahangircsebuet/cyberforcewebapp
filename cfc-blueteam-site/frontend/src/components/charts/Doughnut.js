@@ -12,7 +12,7 @@ function DoughnutChart() {
         axios
           .get('/api/users/der-data/sql')
           .then((res) => {
-            const icsData = res.data.data.data;
+            const icsData = res.data.data.power;
             console.log(icsData);
             setData(icsData)
           })
@@ -26,6 +26,21 @@ function DoughnutChart() {
       //   clearInterval(intervalId);
       // };
     }, []);
+
+    const labels = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
 
     const avgUsage = ({
       labels: data.map((data) => data.month),
