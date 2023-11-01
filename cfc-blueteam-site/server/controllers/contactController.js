@@ -68,7 +68,7 @@ exports.fileUpload = catchAsync(async (req, res, next) => {
         'No matching contact data found!',
     });
   } else {
-    contactData.file = fileName;
+    contactData.file = "http://localhost:3000/static/" + fileName;
     await contactData.save();
   }
 
