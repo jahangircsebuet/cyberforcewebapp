@@ -53,15 +53,15 @@ const AdminUserCards = () => {
                 <strong>Email:</strong> {user.email}
               </p>
               <p>
-                <strong>ID:</strong> {user._id}
+                <strong>ID:</strong> {user.id}
               </p>
               <p>
-                <strong>Role: </strong> {user.role}
+                <strong>Role: </strong> {user.is_admin}
               </p>
             </div>
 
             <div className='card-footer'>
-              <button onClick={() => deleteUser(user._id)}>Delete</button>
+              <button onClick={() => deleteUser(user.id)}>Delete</button>
             </div>
           </div>
         </div>
