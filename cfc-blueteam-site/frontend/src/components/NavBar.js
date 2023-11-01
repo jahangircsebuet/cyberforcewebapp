@@ -25,7 +25,12 @@ function NavBar() {
       document.getElementById('scroll-to-about-us-div').scrollIntoView({behavior: 'smooth'});
     } else {
       console.log("else block");
-      window.location.href = "http://localhost:3000";
+      // window.location.href = "http://localhost:3000";
+      console.log("else block");
+      setTimeout(
+        () => document.getElementById('scroll-to-about-us-div').scrollIntoView({behavior: 'smooth'}),
+        0
+      );
     }
   }
 
@@ -44,7 +49,7 @@ function NavBar() {
         <nav>
           <ul className='nav__links'>
             <li>
-              <Link id='aboutUs' onClick={scrollToAboutUs}>About Us</Link>
+              <Link to='/' onClick={scrollToAboutUs}>About Us</Link>
             </li>
             <li>
               <Link to='/der-data'>DER Data</Link>
