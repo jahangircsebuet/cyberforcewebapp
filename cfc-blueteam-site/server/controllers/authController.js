@@ -17,7 +17,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
-    is_admin: req.body.is_admin,
+    is_admin: 0, // by default non admin user
   });
 
   const token = signToken(newUser.id, newUser.is_admin);
@@ -51,6 +51,7 @@ exports.login = catchAsync(async (req, res, next) => {
   const id = user.id;
   const fullname = user.name;
   const dbPassword = user.password;
+  const role = 0;
 
   if (is_admin) {
     role = 'admin';
