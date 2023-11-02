@@ -54,7 +54,7 @@ function NavBar() {
         <nav>
           <ul className='nav__links'>
             <li>
-              <Link to='/' onClick={scrollToAboutUs}>About Us</Link>
+              <Link to='/about-us' onClick={scrollToAboutUs}>About Us</Link>
             </li>
             <li>
               <Link to='/der-data'>DER Data</Link>

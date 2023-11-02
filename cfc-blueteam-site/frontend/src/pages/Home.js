@@ -10,9 +10,8 @@ function Home() {
   }
   exec();
   return (
-    <div className='content-container'>
-      <div className='about-container'>
-        <div className='home-header'>
+    <div className='content-container-home'>
+      <div className='home-header'>
           <h1>Welcome to DER8.9</h1>
           <h2>Part of JakaaGen Inc</h2>
         </div>
@@ -25,143 +24,46 @@ function Home() {
           </p>
         </div>
 
-        <div className='services-heading' id="scroll-to-about-us-div">
-          <h2>About Us</h2>
+      <div className='der-data'>
+        <h2>DER Data Display</h2>
+        <p>
+          Access real-time data on our distributed energy resources and monitor
+          their performance. Stay informed about energy production, consumption,
+          and savings.
+        </p>
+        <a href='/der-data'>View DER Data</a>
+      </div>
+
+      <div className='social-proof'>
+        <h2>Social Proof</h2>
+        <div className='testimonial'>
+          <img
+            src={require('../assets/img/users/default.jpg')}
+            alt='Customer 1'
+          />
+          <p>
+            "DER8.9's renewable energy solutions have helped us reduce our
+            energy costs and minimize our environmental impact. Highly
+            recommended!"
+          </p>
+          <span>- John Doe, CEO of ABC Corporation</span>
         </div>
-        <div className='services'>
-          <div className='service-card'>
-            <div className='service-card-header'>
-              <div className='card-heading'>
-                <h3>Solar Power Solutions</h3>
-              </div>
-            </div>
-            <div className='card-img-wrap'>
-              <img
-                src={require('../assets/img/solarpanel.jpg')}
-                className='card-image'
-                alt='solar panel instalation'
-              />
-            </div>
-            <div className='service-card-details'>
-              <span>
-                We design, install, and maintain state-of-the-art solar
-                photovoltaic systems for residential, commercial, and industrial
-                applications.
-              </span>
-            </div>
-          </div>
-          <div className='service-card'>
-            <div className='service-card-header'>
-              <div className='card-heading'>
-                <h3>Energy Storage Solutions</h3>
-              </div>
-            </div>
-            <div className='card-img-wrap'>
-              <img
-                src={require('../assets/img/energystorage.jpeg')}
-                className='card-image'
-                alt='solar panel instalation'
-              />
-            </div>
-            <div className='service-card-details'>
-              <span>
-                We offer cutting-edge energy storage solutions, utilizing
-                advanced battery technologies, to store excess energy generated
-                from renewable sources.
-              </span>
-            </div>
-          </div>
-
-          <div className='service-card'>
-            <div className='service-card-header'>
-              <div className='card-heading'>
-                <h3>Microgrid Development</h3>
-              </div>
-            </div>
-            <div className='card-img-wrap'>
-              <img
-                src={require('../assets/img/energy-management-system-for-microgrids.png')}
-                className='card-image'
-                alt='solar panel instalation'
-              />
-            </div>
-            <div className='service-card-details'>
-              <span>
-                DER8.9 specializes in developing and implementing customized
-                microgrid solutions that integrate various energy resources.
-              </span>
-            </div>
-          </div>
-
-          <div className='service-card'>
-            <div className='service-card-header'>
-              <div className='card-heading'>
-                <h3>Demand Response Programs</h3>
-              </div>
-            </div>
-            <div className='card-img-wrap'>
-              <img
-                src={require('../assets/img/IEC–DRP_IMAGE1.jpg')}
-                className='card-image'
-                alt='solar panel instalation'
-              />
-            </div>
-            <div className='service-card-details'>
-              <span>
-                We assist our customers in participating in demand response
-                programs to actively manage their energy consumption during
-                high-demand periods.
-              </span>
-            </div>
-          </div>
-          <div className='service-card'>
-            <div className='service-card-header'>
-              <div className='card-heading'>
-                <h3>Energy Management and Monitoring</h3>
-              </div>
-            </div>
-            <div className='card-img-wrap'>
-              <img
-                src={require('../assets/img/shutterstock_1504979759-1-scaled.jpg')}
-                className='card-image'
-                alt='solar panel instalation'
-              />
-            </div>
-            <div className='service-card-details'>
-              <span>
-                Our innovative energy management software enables customers to
-                track, analyze, and optimize their energy usage in real-time.
-              </span>
-            </div>
-          </div>
-          <div className='service-card'>
-            <div className='service-card-header'>
-              <div className='card-heading'>
-                <h3>Smart Grid Integration</h3>
-              </div>
-            </div>
-            <div className='card-img-wrap'>
-              <img
-                src={require('../assets/img/smart-grid.jpg')}
-                className='card-image'
-                alt='solar panel instalation'
-              />
-            </div>
-            <div className='service-card-details'>
-              <div>
-                <span>
-                  Our Smart Grid Integration service helps clients seamlessly
-                  integrate their energy systems with smart grid technologies.
-                  By leveraging advanced data analytics and real-time
-                  monitoring, we optimize energy distribution, improve grid
-                  reliability, and enable efficient energy management.
-                </span>
-              </div>
-            </div>
-          </div>
+        <div className='testimonial'>
+          <img
+            src={require('../assets/img/users/default.jpg')}
+            alt='Customer 2'
+          />
+          <p>
+            "We are thrilled with the microgrid solution implemented by
+            DER8.9. It has significantly improved our energy resiliency and
+            reduced downtime during grid outages."
+          </p>
+          <span>- Jane Smith, Facilities Manager at XYZ Hospital</span>
         </div>
       </div>
     </div>
+
+    
   );
 }
 
