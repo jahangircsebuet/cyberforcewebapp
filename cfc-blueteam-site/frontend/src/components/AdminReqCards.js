@@ -6,31 +6,39 @@ import { AuthContext } from '../context/AuthContext';
 const AdminReqCards = () => {
   const { contactReqData, fetchContactRequests } = useContext(AdminContext);
   const { token } = useContext(AuthContext);
+  const [fileData, setFileData] = useState(null);
 
 
-  // file download 
-  const [file, setFile] = useState();
-  const fileLink = useRef();
-  useEffect(() => {
-    if (file) {
-      fileLink.current.click();
-    }
-  }, [file]);
-
-  // const download = async (e) => {
-  //   alert("download called");
-  //   const url = window.URL.createObjectURL(new Blob([e.target.innerText]));
-  //   const link = document.createElement('a');
-  //   link.href = url;
-  //   link.setAttribute('download', e.target.innerText);
-  //   document.body.appendChild(link);
-  //   link.click();
-  // };
-
-  const fetchFile = async (e) => {
-    const response = await fetch(e.target.innerText);
-    const data = await response.json();
-    setFile(data);
+  const handleFileRetrieval = async (e) => {
+    let filename = e.target.getAttribute("data-file");
+    filename = filename.substring(filename.indexOf('/static') + '/static/'.length, filename.length);
+    // Make an HTTP GET request to your server API endpoint
+    fetch('/api/contact-data/retrieve', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ filename }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('File not found');
+        }
+        return response.blob();
+      })
+      .then((data) => {
+        // Downloads the file
+        const link = document.createElement("a");
+        link.download = filename;
+        const blob = new Blob([data]);
+        link.href = URL.createObjectURL(blob);
+        link.click();
+        URL.revokeObjectURL(link.href);
+        setFileData(data);
+      })
+      .catch((error) => {
+        console.error('Error retrieving file:', error);
+      });
   };
 
   const deleteRequest = (id) => {
@@ -85,10 +93,8 @@ const AdminReqCards = () => {
                 <strong>Message:</strong> {item.message}
               </p>
               <p>
-                <strong>File Link: </strong> {!item.file ? 'N/A' : <a href={item.file} target="_blank" rel="noreferrer" onClick={fetchFile}>Open</a>}
-                | {<a download href={item.file} target="_blank" ref={fileLink} onClick={fetchFile}>Download</a>}
-                
-                {/* <strong>File Link: </strong> {!item.file ? 'N/A' : item.file} */}
+                <strong>File Link: </strong> {!item.file ? 'N/A' : <a href={item.file} target="_blank" rel="noreferrer">Open File</a>}
+                | <a href={item.file} data-file={item.file} target="_blank" rel="noreferrer" onClick={handleFileRetrieval}>Download File</a>
               </p>
             </div>
 

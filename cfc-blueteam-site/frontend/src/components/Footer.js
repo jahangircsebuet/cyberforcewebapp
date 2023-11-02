@@ -1,7 +1,10 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Footer.css';
+import { AuthContext } from '../context/AuthContext';
 
 function Footer() {
+  const { logoutUserAction, token, role } = useContext(AuthContext);
   const scrollToAboutUs = async ()=>{
     console.log("Footer");
     if(document.getElementById('scroll-to-about-us-div')) {
@@ -44,7 +47,10 @@ function Footer() {
               <Link to='/der-data'>DER Data</Link>
             </li>
             <li>
-              <Link to='/contact-us' onClick={scrollToTop}>Contact Us</Link>
+            {role !== 'admin' ? (
+                <Link to='/contact-us' onClick={scrollToTop}>Contact Us</Link>
+              ) : ("")}
+              
             </li>
           </ul>
         </div>

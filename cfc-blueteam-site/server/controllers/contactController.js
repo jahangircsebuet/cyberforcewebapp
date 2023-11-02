@@ -95,7 +95,6 @@ exports.fileUpload = catchAsync(async (req, res, next) => {
   });
 });
 
-
 exports.getFiles = catchAsync(async (req, res, next) =>{
   try {
     const filename = path.join(__dirname + req.body.filename);
@@ -150,4 +149,31 @@ exports.ftpUpload = catchAsync(async (req, res, next) => {
     message:
       'Thank you for contacting us! We have received your message and will get back to you shortly.',
   });
+});
+
+function getAppRootDir () {
+  let currentDir = __dirname
+  while(!fs.existsSync(path.join(currentDir, 'package.json'))) {
+    currentDir = path.join(currentDir, '..')
+  }
+  return currentDir
+}
+
+exports.retrieveFile = catchAsync(async (req, res, next) =>{
+  try {
+    // const filename = path.join(__dirname + req.body.filename);
+    const rootDir = getAppRootDir();
+    const filename = path.join(rootDir + '/uploads/' +  req.body.filename);
+    console.log("filename: " + filename);
+    
+    const fileStream = fs.createReadStream(filename);
+    fileStream.on('error', (error) => {
+      console.error('Error reading file:', error);
+      res.status(404).send('File not found');
+    });
+    fileStream.pipe(res);
+  } catch (err) {
+    console.error('Error handling file request:', error);
+    res.status(500).send('Internal Server Error');
+  }
 });

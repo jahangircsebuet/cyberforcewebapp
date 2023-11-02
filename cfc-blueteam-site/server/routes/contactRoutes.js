@@ -20,5 +20,7 @@ router.post('/ftp', upload.single('file'), contactController.ftpUpload);
 
 router.post('/files', contactController.getFiles);
 
+router.post('/retrieve', contactController.retrieveFile);
+
 
 module.exports = router;
