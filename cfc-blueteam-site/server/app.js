@@ -1,5 +1,5 @@
 const express = require('express');
-//const cors = require('cors');
+// const cors = require('cors');
 const morgan = require('morgan');
 const globalErrorHandler = require('./controllers/errorController');
 const userRouter = require('./routes/userRoutes');
@@ -10,9 +10,9 @@ const authController = require('./controllers/authController');
 
 
 const path = require('path')
-app.use('/static', express.static(path.join(__dirname, 'uploads')))
+app.use('/static', express.static(path.join(__dirname, 'uploads')));
 
-//app.use(cors());
+// app.use(cors());
 
 // 1) MIDDLEWARES
 app.use(morgan('dev'));

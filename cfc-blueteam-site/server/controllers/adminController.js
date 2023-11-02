@@ -60,6 +60,15 @@ exports.deleteRequest = catchAsync(async (req, res, next) => {
 // delete single user 
 exports.deleteUser = catchAsync(async (req, res, next) => {
   console.log("Deleted ID:",req.params.id);
+  
+  const user = await users.findOne({where: {id: req.params.id}});
+  if(user && user.is_admin) {
+    // status 409 conflict
+    res.status(409).json({
+      status: 'failed',
+      message: 'Admin user can not be deleted!',
+    });
+  }
   const doc = await users.destroy({
     where: {
       id: req.params.id
