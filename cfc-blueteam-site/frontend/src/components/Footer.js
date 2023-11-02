@@ -30,6 +30,7 @@ function Footer() {
               className='logo'
               src={require('../assets/img/DER8-9.png')}
               alt='logo'
+              onClick={scrollToTop}
             />
           </Link>
         </div>
@@ -37,7 +38,7 @@ function Footer() {
         <div>
           <ul className='footer_links'>
             <li>
-            <Link to='/' onClick={scrollToAboutUs}>About Us</Link>
+            <Link to='/about-us' onClick={scrollToAboutUs}>About Us</Link>
             </li>
             <li>
               <Link to='/der-data'>DER Data</Link>
