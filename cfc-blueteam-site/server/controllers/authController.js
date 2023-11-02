@@ -51,7 +51,7 @@ exports.login = catchAsync(async (req, res, next) => {
   const id = user.id;
   const fullname = user.name;
   const dbPassword = user.password;
-  const role = is_admin ? 'admin':0;
+  const role = is_admin ? 'admin':'user';
 
   // if (is_admin) {
   //   role = 'admin';
