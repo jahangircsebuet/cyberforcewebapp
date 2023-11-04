@@ -37,8 +37,9 @@ app.use('/api/admin', adminRouter);
 
 app.use(globalErrorHandler); // mostly unused
 
-// file upload revised start const router = express.Router();
-
+// file upload revised start 
+// const router = express.Router();
+const multer = require('multer');
 // const storage = multer.memoryStorage();
 const storage = multer.diskStorage({ 
   destination: function (req, file, cb) { 
