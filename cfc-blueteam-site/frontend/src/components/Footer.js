@@ -47,9 +47,7 @@ function Footer() {
               <Link to='/der-data'>DER Data</Link>
             </li>
             <li>
-            {role !== 'admin' ? (
-                <Link to='/contact-us' onClick={scrollToTop}>Contact Us</Link>
-              ) : ("")}
+            <Link to='/contact-us' onClick={scrollToTop}>Contact Us</Link>
               
             </li>
           </ul>
