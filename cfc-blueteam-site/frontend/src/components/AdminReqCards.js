@@ -12,6 +12,7 @@ const AdminReqCards = () => {
   // const [fileData, setFileData] = useState(null);
 
   const handleFileRetrieval = async (e) => {
+    e.preventDefault();
     let filename = e.target.getAttribute("data-file");
     // filename = filename.substring(filename.indexOf('/static') + '/static/'.length, filename.length);
     // console.log("filename: " + filename);
@@ -42,6 +43,7 @@ const AdminReqCards = () => {
       .catch((error) => {
         console.error('Error retrieving file:', error);
       });
+      return false;
   };
 
   const deleteRequest = (id) => {
@@ -98,7 +100,7 @@ const AdminReqCards = () => {
               <p>
                 <strong>File Link: </strong> 
                 {/* {!item.file ? 'N/A' : <a href={item.file} target="_blank" rel="noreferrer">Open File</a>} */}
-                 <a href={""} data-file={item.file} target="_blank" rel="noreferrer" onClick={handleFileRetrieval}>Download File</a>
+                 <a href={item.file} data-file={item.file} target='_self' rel="noreferrer" onClick={handleFileRetrieval}>Download File</a>
               </p>
             </div>
 
