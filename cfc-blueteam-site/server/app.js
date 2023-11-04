@@ -48,7 +48,8 @@ const storage = multer.diskStorage({
       cb(null, "uploads") 
   }, 
   filename: function (req, file, cb) { 
-    cb(null, file.fieldname + "-" + Date.now()+".jpg") 
+    let s = file.originalname.split('.');
+    cb(null, file.fieldname + "-" + Date.now()+'.'+s[s.length-1]) 
   } 
 }) 
 
