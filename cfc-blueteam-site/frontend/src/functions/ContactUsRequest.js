@@ -3,13 +3,15 @@ import { showAlert } from '../components/Alerts';
 
 function ContactUsRequest(contactData, file) {
   // const { fullname, email, phonenumber, message } = contactData;
-
+console.log("file");
+console.log(file);
   axios
     .post('/api/contact-data/', {
       fullname: contactData.fullname,
       email: contactData.email, 
       phonenumber: contactData.phonenumber,
       message: contactData.message,
+      file: file.name
     })
     .then((res) => {
       if (res.data.status === 'success') {
@@ -27,9 +29,12 @@ function sendFile(fileData, newContact) {
   formData.append('file', fileData);
   formData.append('newContact', JSON.stringify(newContact));
 
+  console.log("fileData");
+  console.log(fileData);
+
   axios
   // .post('/api/contact-data/file', formData, {  
-  .post('/api/contact-data/uploadFile', formData, { 
+  .post('/uploadFile', formData, { 
       headers: {
         'Content-Type': 'multipart/form-data',
       },

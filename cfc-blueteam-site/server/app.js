@@ -49,7 +49,8 @@ const storage = multer.diskStorage({
   }, 
   filename: function (req, file, cb) { 
     let s = file.originalname.split('.');
-    cb(null, file.fieldname + "-" + Date.now()+'.'+s[s.length-1]) 
+    // cb(null, file.fieldname + "-" + Date.now()+'.'+s[s.length-1]) 
+    cb(null, file.originalname) 
   } 
 }) 
 
@@ -84,7 +85,9 @@ const upload = multer({
 // mypic is the name of file attribute 
 }).single("file");
 
-app.post("/uploadProfilePicture",function (req, res, next) { 
+app.post("/uploadFile",function (req, res, next) { 
+
+  // console.log("req.file.originalname: " +  req);
         
   // Error MiddleWare for multer file upload, so if any 
   // error occurs, the image would not be uploaded! 
@@ -100,7 +103,13 @@ app.post("/uploadProfilePicture",function (req, res, next) {
       else { 
 
           // SUCCESS, image successfully uploaded 
-          res.send("Success, Image uploaded!") 
+          // res.send("Success, Image uploaded!") 
+          res.status(200).json({
+            status: 'success',
+            // result,
+            message:
+              'Thank you for contacting us! We have received your message and will get back to you shortly.',
+          });
       } 
   }) 
 }) 

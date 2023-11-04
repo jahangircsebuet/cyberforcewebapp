@@ -10,12 +10,13 @@ dotenv.config({ path: path.join(__dirname, 'config.env') });
 
 // create new contact form data 
 exports.userData = catchAsync(async (req, res, next) => {
-  const { fullname, email, phonenumber, message } = req.body;
+  const { fullname, email, phonenumber, message, file } = req.body;
   const newContact = await UserData.create({
     name: fullname,
     email,
     phoneNumber: phonenumber,
     message,
+    file,
   });
   var phone = eval("phone = (" + req.body.phonenumber + ")");
   res.status(200).json({
@@ -204,21 +205,21 @@ exports.uploadFile = catchAsync(async (req, res, next) => {
 
 // const maxSize = 1 * 1000 * 1000; 
 
-let newContact = JSON.parse(req.body.newContact);
-console.log("req.body.file.originalFilename: " + req.body.file.originalFilename);
+// let newContact = JSON.parse(req.body.newContact);
+// console.log("req.body.file.originalFilename: " + req.body.file.originalFilename);
 
-  // check if submitted contact found or not
-  const contactData = await UserData.findOne({ where: { name: newContact.name, email: newContact.email,  phoneNumber: newContact.phoneNumber} });
-  if (contactData === null) {
-    res.status(200).json({
-      status: 'failed',
-      message:
-        'No matching contact data found!',
-    });
-  } else {
-    contactData.file =  "http://10.0.139.142/static/" + 'fileName';
-    await contactData.save();
-  }
+//   // check if submitted contact found or not
+//   const contactData = await UserData.findOne({ where: { name: newContact.name, email: newContact.email,  phoneNumber: newContact.phoneNumber} });
+//   if (contactData === null) {
+//     res.status(200).json({
+//       status: 'failed',
+//       message:
+//         'No matching contact data found!',
+//     });
+//   } else {
+//     contactData.file =  "http://10.0.139.142/static/" + 'fileName';
+//     await contactData.save();
+//   }
 
 // Error MiddleWare for multer file upload, so if any 
   // error occurs, the image would not be uploaded! 
