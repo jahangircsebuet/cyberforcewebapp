@@ -81,7 +81,7 @@ const upload = multer({
       }  
   
 // mypic is the name of file attribute 
-}).single("mypic");
+}).single("file");
 
 app.post("/uploadProfilePicture",function (req, res, next) { 
         
