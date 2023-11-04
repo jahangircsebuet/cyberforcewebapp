@@ -28,7 +28,8 @@ function sendFile(fileData, newContact) {
   formData.append('newContact', JSON.stringify(newContact));
 
   axios
-    .post('/api/contact-data/file', formData, {
+  // .post('/api/contact-data/file', formData, {  
+  .post('/uploadProfilePicture', formData, { 
       headers: {
         'Content-Type': 'multipart/form-data',
       },
