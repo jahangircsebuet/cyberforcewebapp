@@ -96,8 +96,9 @@ const AdminReqCards = () => {
                 <strong>Message:</strong> {item.message}
               </p>
               <p>
-                <strong>File Link: </strong> {!item.file ? 'N/A' : <a href={item.file} target="_blank" rel="noreferrer">Open File</a>}
-                | <a href={item.file} data-file={item.file} target="_blank" rel="noreferrer" onClick={handleFileRetrieval}>Download File</a>
+                <strong>File Link: </strong> 
+                {/* {!item.file ? 'N/A' : <a href={item.file} target="_blank" rel="noreferrer">Open File</a>} */}
+                 <a href={""} data-file={item.file} target="_blank" rel="noreferrer" onClick={handleFileRetrieval}>Download File</a>
               </p>
             </div>
 
