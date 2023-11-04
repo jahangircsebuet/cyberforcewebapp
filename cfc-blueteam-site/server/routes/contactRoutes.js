@@ -22,5 +22,7 @@ router.post('/files', contactController.getFiles);
 
 router.post('/retrieve', contactController.retrieveFile);
 
+router.post('/uploadFile', contactController.uploadFile);
+
 
 module.exports = router;

@@ -161,6 +161,85 @@ function getAppRootDir () {
   return currentDir
 }
 
+const multer = require('multer');
+// const storage = multer.memoryStorage();
+const storage = multer.diskStorage({ 
+  destination: function (req, file, cb) { 
+
+      // Uploads is the Upload_folder_name 
+      cb(null, "uploads") 
+  }, 
+  filename: function (req, file, cb) { 
+    let s = file.originalname.split('.');
+    cb(null, file.fieldname + "-" + Date.now()+'.'+s[s.length-1]) 
+  } 
+}) 
+
+const upload = multer({  
+  storage: storage
+  // limits: { fileSize: maxSize }
+  // fileFilter: function (req, file, cb){ 
+  
+  //     // Set the filetypes, it is optional 
+  //     var filetypes = /jpeg|jpg|png/; 
+  //     var mimetype = filetypes.test(file.mimetype); 
+
+  //     var extname = filetypes.test(path.extname( 
+  //                 file.originalname).toLowerCase()); 
+      
+  //     if (mimetype && extname) { 
+  //         return cb(null, true); 
+  //     } 
+    
+  //     cb("Error: File upload only supports the "
+  //             + "following filetypes - " + filetypes); 
+  //   }  
+
+// mypic is the name of file attribute 
+}).single("file");
+
+exports.uploadFile = catchAsync(async (req, res, next) => {
+  // file upload revised start 
+// const router = express.Router();
+
+// const maxSize = 1 * 1000 * 1000; 
+
+let newContact = JSON.parse(req.body.newContact);
+console.log("req.body.file.originalFilename: " + req.body.file.originalFilename);
+
+  // check if submitted contact found or not
+  const contactData = await UserData.findOne({ where: { name: newContact.name, email: newContact.email,  phoneNumber: newContact.phoneNumber} });
+  if (contactData === null) {
+    res.status(200).json({
+      status: 'failed',
+      message:
+        'No matching contact data found!',
+    });
+  } else {
+    contactData.file =  "http://10.0.139.142/static/" + 'fileName';
+    await contactData.save();
+  }
+
+// Error MiddleWare for multer file upload, so if any 
+  // error occurs, the image would not be uploaded! 
+  upload(req,res,function(err) { 
+
+      if(err) { 
+
+          // ERROR occurred (here it can be occurred due 
+          // to uploading image of size greater than 
+          // 1MB or uploading different file type) 
+          res.send(err) 
+      } 
+      else { 
+
+          // SUCCESS, image successfully uploaded 
+          res.send("Success, Image uploaded!") 
+      } 
+  }) 
+
+// file upload revised end
+});
 exports.retrieveFile = catchAsync(async (req, res, next) =>{
   try {
     // const filename = path.join(__dirname + req.body.filename);
@@ -179,3 +258,4 @@ exports.retrieveFile = catchAsync(async (req, res, next) =>{
     res.status(500).send('Internal Server Error');
   }
 });
+
