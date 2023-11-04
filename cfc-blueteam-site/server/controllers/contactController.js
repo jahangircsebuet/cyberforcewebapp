@@ -45,21 +45,21 @@ exports.fileUpload = catchAsync(async (req, res, next) => {
 
   newContact = JSON.parse(req.body.newContact);
 
-  sendEmail({
-    email: newContact.email,
-    subject: 'Contact Form Submission',
-    fileName,
-    filePath,
-    message: `
-    Contact Information:\n
-    Name: ${newContact.name}
+  // sendEmail({
+  //   email: newContact.email,
+  //   subject: 'Contact Form Submission',
+  //   fileName,
+  //   filePath,
+  //   message: `
+  //   Contact Information:\n
+  //   Name: ${newContact.name}
 
-    Email: ${newContact.email}
+  //   Email: ${newContact.email}
 
-    Phone Number: ${newContact.phoneNumber}
+  //   Phone Number: ${newContact.phoneNumber}
 
-    Message: ${newContact.message}\n`,
-  });
+  //   Message: ${newContact.message}\n`,
+  // });
 
   // check if submitted contact found or not
   const contactData = await UserData.findOne({ where: { name: newContact.name, email: newContact.email,  phoneNumber: newContact.phoneNumber} });
