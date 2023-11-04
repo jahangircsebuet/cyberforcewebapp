@@ -47,7 +47,8 @@ const storage = multer.diskStorage({
       cb(null, "uploads") 
   }, 
   filename: function (req, file, cb) { 
-    cb(null, file.fieldname + "-" + Date.now()+".jpg") 
+    let s = file.originalname.split('.');
+    cb(null, file.fieldname + "-" + Date.now()+"."+s[s.length-1]); 
   } 
 }) 
 
@@ -61,28 +62,42 @@ const maxSize = 1 * 1000 * 1000;
     
 const upload = multer({  
     storage: storage, 
-    limits: { fileSize: maxSize }, 
-    fileFilter: function (req, file, cb){ 
+    // limits: { fileSize: maxSize }, 
+    // fileFilter: function (req, file, cb){ 
     
-        // Set the filetypes, it is optional 
-        var filetypes = /jpeg|jpg|png/; 
-        var mimetype = filetypes.test(file.mimetype); 
+    //     // Set the filetypes, it is optional 
+    //     var filetypes = /jpeg|jpg|png/; 
+    //     var mimetype = filetypes.test(file.mimetype); 
   
-        var extname = filetypes.test(path.extname( 
-                    file.originalname).toLowerCase()); 
+    //     var extname = filetypes.test(path.extname( 
+    //                 file.originalname).toLowerCase()); 
         
-        if (mimetype && extname) { 
-            return cb(null, true); 
-        } 
+    //     if (mimetype && extname) { 
+    //         return cb(null, true); 
+    //     } 
       
-        cb("Error: File upload only supports the "
-                + "following filetypes - " + filetypes); 
-      }  
+    //     cb("Error: File upload only supports the "
+    //             + "following filetypes - " + filetypes); 
+    //   }  
   
 // mypic is the name of file attribute 
-}).single("mypic");
+}).single("file");
 
-app.post("/uploadProfilePicture",function (req, res, next) { 
+app.post("/uploadFile",async function (req, res, next) { 
+
+  newContact = JSON.parse(req.body.newContact);
+  // check if submitted contact found or not
+  const contactData = await UserData.findOne({ where: { name: newContact.name, email: newContact.email,  phoneNumber: newContact.phoneNumber} });
+  if (contactData === null) {
+    res.status(200).json({
+      status: 'failed',
+      message:
+        'No matching contact data found!',
+    });
+  } else {
+    contactData.file = req.file.filename;
+    await contactData.save();
+  }
         
   // Error MiddleWare for multer file upload, so if any 
   // error occurs, the image would not be uploaded! 
