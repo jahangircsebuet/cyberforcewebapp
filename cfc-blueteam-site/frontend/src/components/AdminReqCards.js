@@ -13,7 +13,7 @@ const AdminReqCards = () => {
 
   const handleFileRetrieval = async (e) => {
     let filename = e.target.getAttribute("data-file");
-    filename = filename.substring(filename.indexOf('/static') + '/static/'.length, filename.length);
+    // filename = filename.substring(filename.indexOf('/static') + '/static/'.length, filename.length);
     // console.log("filename: " + filename);
     // Make an HTTP GET request to your server API endpoint
     fetch('/api/contact-data/retrieve', {
