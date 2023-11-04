@@ -1,17 +1,20 @@
 import { AdminContext } from '../context/AdminContext';
-import { useContext, useRef, useState, useEffect} from 'react';
+import { useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+// const dotenv = require('dotenv');
+// const path = require('path');
+// dotenv.config({ path: path.join(__dirname, 'config.env') });
 
 const AdminReqCards = () => {
   const { contactReqData, fetchContactRequests } = useContext(AdminContext);
   const { token } = useContext(AuthContext);
-  const [fileData, setFileData] = useState(null);
-
+  // const [fileData, setFileData] = useState(null);
 
   const handleFileRetrieval = async (e) => {
     let filename = e.target.getAttribute("data-file");
     filename = filename.substring(filename.indexOf('/static') + '/static/'.length, filename.length);
+    // console.log("filename: " + filename);
     // Make an HTTP GET request to your server API endpoint
     fetch('/api/contact-data/retrieve', {
       method: 'POST',
@@ -34,7 +37,7 @@ const AdminReqCards = () => {
         link.href = URL.createObjectURL(blob);
         link.click();
         URL.revokeObjectURL(link.href);
-        setFileData(data);
+        // setFileData(data);
       })
       .catch((error) => {
         console.error('Error retrieving file:', error);

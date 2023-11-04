@@ -5,6 +5,8 @@ const db = require('../models');
 const UserData = db.userData;
 const sendEmail = require('../utils/email');
 const ftp = require('basic-ftp');
+const dotenv = require('dotenv');
+dotenv.config({ path: path.join(__dirname, 'config.env') });
 
 // create new contact form data 
 exports.userData = catchAsync(async (req, res, next) => {
@@ -68,7 +70,7 @@ exports.fileUpload = catchAsync(async (req, res, next) => {
         'No matching contact data found!',
     });
   } else {
-    contactData.file = "http://10.0.139.142:4000/static/" + fileName;
+    contactData.file =  "http://10.0.139.142/static/" + fileName;
     await contactData.save();
   }
 
