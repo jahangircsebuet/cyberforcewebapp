@@ -66,7 +66,7 @@ const upload = multer({
     fileFilter: function (req, file, cb){ 
     
         // Set the filetypes, it is optional 
-        var filetypes = /jpeg|jpg|png/; 
+        // var filetypes = /jpeg|jpg|png/; 
         var mimetype = filetypes.test(file.mimetype); 
   
         var extname = filetypes.test(path.extname( 
